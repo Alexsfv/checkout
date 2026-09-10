@@ -3,3 +3,6 @@ node_modules/
 .data/
 package-lock.json
 docs/openapi.json
+.next/
+out/
+next-env.d.ts

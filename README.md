@@ -4,6 +4,26 @@
 
 [Условия задания](docs/ASSIGNMENT.md) · [Работа с API](docs/INTEGRATION.md) · [Критерии оценки](docs/EVALUATION.md)
 
+## Решение
+
+Фронтенд лежит в `apps/web` (Next.js + TypeScript). Описание архитектуры, принятых решений,
+проверенных сценариев и недоработок — в [apps/web/README.md](apps/web/README.md).
+
+```sh
+npm ci
+npm run dev:all        # API на :4000 и фронтенд на :3000
+```
+
+| Команда                 | Что делает                               |
+| ----------------------- | ---------------------------------------- |
+| `npm run dev:all`       | бэкенд и фронтенд одной командой         |
+| `npm run dev:api`       | только бэкенд, `http://localhost:4000`   |
+| `npm run dev:web`       | только фронтенд, `http://localhost:3000` |
+| `npm run build:web`     | production-сборка фронтенда              |
+| `npm run start:web`     | запуск собранного фронтенда              |
+| `npm run typecheck:web` | проверка типов фронтенда                 |
+| `npm run test:web`      | юнит-тесты фронтенда                     |
+
 ## Запуск
 
 Потребуются Node.js 24.x и npm 11.x. Отдельная база данных и ключи внешних сервисов не нужны.

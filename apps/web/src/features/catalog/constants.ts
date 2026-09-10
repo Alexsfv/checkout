@@ -1,0 +1,5 @@
+export const CATALOG_SKELETON_COUNT = 4;
+
+export const CATALOG_SKELETON_HEIGHT = 210;
+
+export const LOW_STOCK_THRESHOLD = 5;

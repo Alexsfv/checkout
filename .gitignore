@@ -10,3 +10,8 @@ playwright-report/
 .DS_Store
 *.log
 *.tsbuildinfo
+
+# Next.js
+.next/
+out/
+next-env.d.ts

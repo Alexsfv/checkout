@@ -1,0 +1,62 @@
+.dialog {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  max-width: min(520px, calc(100vw - 24px));
+  width: 100%;
+  color: var(--text);
+}
+
+.dialog::backdrop {
+  background: rgba(12, 16, 22, 0.55);
+  backdrop-filter: blur(2px);
+}
+
+.inner {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-5) var(--space-3);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.description {
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.body {
+  padding: 0 var(--space-5) var(--space-4);
+  max-height: min(60vh, 520px);
+  overflow-y: auto;
+}
+
+.footer {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--border);
+  background: var(--bg-sunken);
+  border-radius: 0 0 calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px);
+}
+
+@media (max-width: 520px) {
+  .footer > * {
+    flex: 1 1 140px;
+  }
+}

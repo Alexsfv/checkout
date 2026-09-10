@@ -22,13 +22,21 @@
     "smoke": "node scripts/smoke.mjs",
     "data:reset": "node scripts/reset.mjs",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "dev:api": "npm run build -w @checkout/contracts && npm run dev -w @checkout/api",
+    "dev:web": "npm run build -w @checkout/contracts && npm run dev -w @checkout/web",
+    "dev:all": "npm run build -w @checkout/contracts && concurrently -n api,web -c cyan,magenta \"npm run dev -w @checkout/api\" \"npm run dev -w @checkout/web\"",
+    "build:web": "npm run build -w @checkout/contracts && npm run build -w @checkout/web",
+    "start:web": "npm run start -w @checkout/web",
+    "typecheck:web": "npm run typecheck -w @checkout/web",
+    "test:web": "npm run test -w @checkout/web"
   },
   "devDependencies": {
     "@apidevtools/swagger-parser": "13.0.0",
     "@types/node": "24.13.3",
     "ajv": "8.20.0",
     "ajv-formats": "3.0.1",
+    "concurrently": "10.0.5",
     "prettier": "3.9.6",
     "tsx": "4.23.13",
     "typescript": "5.9.3"

@@ -1,0 +1,16 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 16px;
+  border-radius: var(--radius);
+  background: var(--warning);
+  color: var(--bg-elevated);
+  font-weight: 550;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.link:hover {
+  text-decoration: none;
+  opacity: 0.9;
+}
