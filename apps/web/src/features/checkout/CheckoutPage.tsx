@@ -127,7 +127,10 @@ export const CheckoutPage = () => {
   };
 
   const deliveryMethods = options.data?.deliveryMethods ?? [];
-  const pickupPoints = deliveryMethods.find((method) => method.id === 'pickup')?.pickupPoints ?? [];
+  const pickupPoints = useMemo(
+    () => deliveryMethods.find((method) => method.id === 'pickup')?.pickupPoints ?? [],
+    [deliveryMethods],
+  );
   const paymentMethods = options.data?.paymentMethods ?? [];
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {

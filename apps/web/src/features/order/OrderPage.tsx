@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { checkoutOptionsQuery, orderQuery } from '@/api/queries';
 import type { Order } from '@/api/types';
@@ -35,9 +35,11 @@ const OrderView = ({ order }: { order: Order }) => {
   const options = useQuery({ ...checkoutOptionsQuery(), meta: { silent: true } });
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  const pickupPoints =
-    options.data?.deliveryMethods.find((method) => method.id === 'pickup')?.pickupPoints ?? [];
-  const delivery = describeDelivery(order.delivery, pickupPoints);
+  const delivery = useMemo(() => {
+    const points =
+      options.data?.deliveryMethods.find((method) => method.id === 'pickup')?.pickupPoints ?? [];
+    return describeDelivery(order.delivery, points);
+  }, [options.data, order.delivery]);
   const status = ORDER_STATUS_LABEL[order.status];
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Cart, Product } from '@/api/types';
-import { applyCartItem, indexByProduct, withoutCartItem } from './model';
+import { applyCartItem, withoutCartItem } from './model';
 
 const product: Product = {
   id: 'lamp-orbit',
@@ -72,13 +72,5 @@ describe('withoutCartItem', () => {
     const next = withoutCartItem(cart(), 'unknown');
     expect(next.items).toHaveLength(2);
     expect(next.subtotal).toBe(427000);
-  });
-});
-
-describe('indexByProduct', () => {
-  it('строит карту «товар -> позиция»', () => {
-    const index = indexByProduct(cart().items);
-    expect(index.get('mug-line')?.quantity).toBe(2);
-    expect(index.has('bag-day')).toBe(false);
   });
 });

@@ -1,7 +1,9 @@
 'use client';
 
+import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { cartQuery, productsQuery } from '@/api/queries';
+import { indexBy } from '@/lib/collections';
 import { formatItems, formatMoney } from '@/lib/format';
 import { Button } from '@/ui/Button';
 import { LinkButton } from '@/ui/LinkButton';
@@ -18,9 +20,7 @@ export const CartPage = () => {
   const products = useQuery(productsQuery());
   const actions = useCartActions();
 
-  const limits = new Map(
-    products.data?.map((product) => [product.id, product.stock] as const) ?? [],
-  );
+  const stock = useMemo(() => indexBy(products.data, (product) => product.id), [products.data]);
 
   return (
     <div className={styles.page}>
@@ -46,7 +46,7 @@ export const CartPage = () => {
                 <ul className={styles.list}>
                   {data.items.map((item) => {
                     const busy = actions.isBusy(item.productId);
-                    const max = limits.get(item.productId) ?? item.quantity;
+                    const max = stock.get(item.productId)?.stock ?? item.quantity;
                     return (
                       <li key={item.productId} className={styles.item}>
                         <div className={styles.info}>

@@ -1,10 +1,11 @@
 'use client';
 
+import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { cartQuery, productsQuery } from '@/api/queries';
 import { QueryBoundary } from '@/ui/QueryBoundary';
 import { Skeleton } from '@/ui/Skeleton';
-import { indexByProduct } from '@/features/cart/model';
+import { indexBy } from '@/lib/collections';
 import { useCartActions } from '@/features/cart/useCartActions';
 import { ResumeOrderBanner } from '@/features/order/ResumeOrderBanner';
 import { CATALOG_SKELETON_COUNT, CATALOG_SKELETON_HEIGHT } from './constants';
@@ -16,7 +17,7 @@ export const CatalogPage = () => {
   const cart = useQuery(cartQuery());
   const actions = useCartActions();
 
-  const inCart = indexByProduct(cart.data?.items ?? []);
+  const inCart = useMemo(() => indexBy(cart.data?.items, (item) => item.productId), [cart.data]);
 
   return (
     <div className={styles.page}>

@@ -29,14 +29,14 @@ export const applyCartItem = (
   quantity: number,
   product?: Product,
 ): Cart => {
-  const existing = cart.items.some((item) => item.productId === productId);
-  const acc = collect(cart.items, (item) =>
-    item.productId === productId
-      ? { ...item, quantity, lineTotal: item.unitPrice * quantity }
-      : item,
-  );
+  let replaced = false;
+  const acc = collect(cart.items, (item) => {
+    if (item.productId !== productId) return item;
+    replaced = true;
+    return { ...item, quantity, lineTotal: item.unitPrice * quantity };
+  });
 
-  if (!existing && product) {
+  if (!replaced && product) {
     const line: CartItem = {
       productId,
       title: product.title,
@@ -57,8 +57,4 @@ export const withoutCartItem = (cart: Cart, productId: string): Cart => {
     cart,
     collect(cart.items, (item) => (item.productId === productId ? null : item)),
   );
-};
-
-export const indexByProduct = (items: readonly CartItem[]): ReadonlyMap<string, CartItem> => {
-  return items.reduce((map, item) => map.set(item.productId, item), new Map<string, CartItem>());
 };
